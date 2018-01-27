@@ -4,66 +4,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context="blasko.daniel.projetisn.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:text="What should you wear today?
-Click the icon to know!"
-        android:textAlignment="center"
-        android:textSize="17sp" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
-        android:clickable="true"
-        android:src="@drawable/logo" />
-
-
-    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/imageView"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="44dp"
-        android:id="@+id/imageView2"
-        tools:src="@drawable/sun"/>
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/sun" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#FFFF"
         android:layout_alignTop="@+id/imageView2"
         android:layout_marginEnd="11dp"
         android:layout_marginTop="12dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
         android:layout_toStartOf="@+id/imageView2"
-        tools:text="Ceci est la première text view"
-        android:id="@+id/textView3" />
+        android:text="Température maximale: 23°C"
+        android:id="@+id/textViewTempMax" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewTempMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="30dp"
-        tools:text="Ceci est la seconde text view" />
+        android:layout_above="@+id/textView"
+        android:layout_alignEnd="@+id/textViewTempMax"
+        android:layout_marginBottom="26dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:textColor="#FFFF"
+        android:text="Température minimale : 17°C" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_marginBottom="11dp"
-        tools:text="Ceci est la troisième text view" />
+        android:layout_alignStart="@+id/textViewTempMin"
+        android:layout_marginBottom="19dp"
+        android:textColor="#FFFF"
+        tools:text="Pas de pluie aujourd'hui."
+        android:id="@+id/textView"
+        android:textStyle="bold"
+        android:textSize="15dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Au vu des prévisions, vous devriez mettre..."
+        android:textColor="#FFFF"
+        android:textSize="17dp"
+        android:textAlignment="center"
+        android:id="@+id/textView4" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="62dp"
+        android:src="@drawable/slip" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_marginStart="18dp"
+        android:src="@drawable/bikini" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:text="OU"
+        android:textColor="#FFFF"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_below="@+id/imageView"
+        android:text="Un slip de bain"
+        android:textColor="#FFFF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageView3"
+        android:layout_below="@+id/imageView3"
+        android:layout_marginStart="11dp"
+        android:text="Un bikini"
+        android:textColor="#FFFF" />
 
 </RelativeLayout>

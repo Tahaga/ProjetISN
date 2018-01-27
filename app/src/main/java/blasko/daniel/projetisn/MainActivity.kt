@@ -13,6 +13,7 @@ import android.location.LocationManager
 import android.content.Context.LOCATION_SERVICE
 import android.location.Location
 import android.location.LocationListener
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                 val weather: Weather? = response?.body()
                 val temp = weather?.main?.temp
                 println("temp : $temp")
+                textViewTempMax.setText(temp.toString())
             }
 
         })
