@@ -9,51 +9,48 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewMeteo"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="45dp"
-        android:src="@drawable/sun" />
+        tools:src="@drawable/sun" />
 
     <TextView
+        android:id="@+id/textViewTempMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViewTempMin"
+        android:layout_below="@+id/textViewTempMin"
+        android:layout_marginTop="36dp"
+        android:text="Maximal temperature : ?°C"
         android:textColor="#FFFF"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_marginEnd="11dp"
-        android:layout_marginTop="12dp"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:layout_toStartOf="@+id/imageView2"
-        android:text="Température maximale: 23°C"
-        android:id="@+id/textViewTempMax" />
+        android:textSize="13dp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/textViewTempMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView"
-        android:layout_alignEnd="@+id/textViewTempMax"
-        android:layout_marginBottom="26dp"
-        android:textStyle="bold"
-        android:textSize="15dp"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignTop="@+id/imageViewMeteo"
+        android:text="Minimal temperature : ?°C"
         android:textColor="#FFFF"
-        android:text="Température minimale : 17°C" />
+        android:textSize="13dp"
+        android:textStyle="italic" />
 
     <TextView
+        android:id="@+id/textViewTempAct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView2"
-        android:layout_alignStart="@+id/textViewTempMin"
-        android:layout_marginBottom="19dp"
+        android:layout_alignBottom="@+id/imageViewMeteo"
+        android:layout_alignStart="@+id/textViewTempMax"
         android:textColor="#FFFF"
-        tools:text="Pas de pluie aujourd'hui."
-        android:id="@+id/textView"
-        android:textStyle="bold"
-        android:textSize="15dp"/>
+        android:textSize="13sp"
+        android:textStyle="bold|italic"
+        tools:text="Actual temperature = ?" />
 
 
     <TextView
@@ -61,48 +58,50 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Au vu des prévisions, vous devriez mettre..."
+        android:text="According to the forecast, you should wear..."
         android:textColor="#FFFF"
         android:textSize="17dp"
         android:textAlignment="center"
-        android:id="@+id/textView4" />
+        android:id="@+id/textViewNull" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_below="@+id/textView4"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="62dp"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/textViewNull"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="86dp"
         android:src="@drawable/slip" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView2"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_marginStart="18dp"
+        android:layout_above="@+id/textView"
+        android:layout_alignStart="@+id/imageViewMeteo"
+        android:layout_marginStart="29dp"
         android:src="@drawable/bikini" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
-        android:text="OU"
+        android:text="OR"
         android:textColor="#FFFF"
         android:textSize="25dp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView"
         android:layout_below="@+id/imageView"
-        android:text="Un slip de bain"
+        android:layout_toStartOf="@+id/textView2"
+        android:text="Sexy swimming trunks"
         android:textColor="#FFFF" />
 
     <TextView
@@ -110,8 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/imageView3"
         android:layout_below="@+id/imageView3"
-        android:layout_marginStart="11dp"
-        android:text="Un bikini"
+        android:text="A cool bikini"
         android:textColor="#FFFF" />
 
 </RelativeLayout>

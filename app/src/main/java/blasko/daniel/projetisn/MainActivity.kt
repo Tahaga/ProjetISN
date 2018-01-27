@@ -11,8 +11,14 @@ import android.location.Geocoder
 import java.util.*
 import android.location.LocationManager
 import android.content.Context.LOCATION_SERVICE
+import android.content.Intent
 import android.location.Location
 import android.location.LocationListener
+import android.support.v7.widget.Toolbar
+import blasko.daniel.projetisn.R.drawable.cloud
+import blasko.daniel.projetisn.R.drawable.logo2
+import blasko.daniel.projetisn.R.styleable.Toolbar
+import blasko.daniel.projetisn.R.styleable.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -44,8 +50,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
         val network = WeatherNetworkClient(applicationContext)
-        val call = network.getWeatherWithCode(67000)
+        val call = network.getWeatherByCity("Strasbourg")
         call.enqueue(object : Callback<Weather>{
             override fun onFailure(call: Call<Weather>?, t: Throwable?) {
                 t?.printStackTrace()
@@ -53,9 +60,17 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<Weather>?, response: Response<Weather>?) {
                 val weather: Weather? = response?.body()
-                val temp = weather?.main?.temp
+                val temp = convertToCelsius(weather?.main?.temp!!)
+                val minTemp = convertToCelsius(weather?.main?.minTemp!!)
+                val maxTemp = convertToCelsius(weather?.main?.maxTemp!!)
                 println("temp : $temp")
-                textViewTempMax.setText(temp.toString())
+                textViewTempMax.setText("Maximal temperature : ${maxTemp.toString()}°C")
+                textViewTempMin.setText("Minimal temperature : ${minTemp.toString()}°C")
+                textViewTempAct.setText("Actual temperature : ${temp.toString()}°C")
+
+                if(temp <= 13){
+                    imageViewMeteo.setImageResource(cloud)
+                }
             }
 
         })
@@ -63,7 +78,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //private fun presentData(main: Main) {
-    //currentTemp.text = main.temp.toString()
-    //}
+    fun convertToCelsius(temp: Float): Double{
+        return Math.round(((temp - 32)/1.8)).toDouble()
+    }
+
 }
