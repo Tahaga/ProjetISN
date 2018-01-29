@@ -15,8 +15,7 @@ import android.content.Intent
 import android.location.Location
 import android.location.LocationListener
 import android.support.v7.widget.Toolbar
-import blasko.daniel.projetisn.R.drawable.cloud
-import blasko.daniel.projetisn.R.drawable.logo2
+import blasko.daniel.projetisn.R.drawable.*
 import blasko.daniel.projetisn.R.styleable.Toolbar
 import blasko.daniel.projetisn.R.styleable.View
 import kotlinx.android.synthetic.main.activity_main.*
@@ -70,6 +69,9 @@ class MainActivity : AppCompatActivity() {
 
                 if(temp <= 13){
                     imageViewMeteo.setImageResource(cloud)
+                }
+                if(temp > 13) {
+                    imageViewMeteo.setImageResource(sun)
                 }
             }
 
