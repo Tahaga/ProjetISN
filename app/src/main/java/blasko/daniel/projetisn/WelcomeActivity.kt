@@ -14,7 +14,7 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-
+        // On lance MainActivity au clic sur le logo, pas d'extra avec l'intent pour l'instant
         activityLogo.setOnClickListener {
             val myIntent = Intent(this@WelcomeActivity, MainActivity::class.java)
             //myIntent.putExtra("key", value) -> Quand on demandera la ville

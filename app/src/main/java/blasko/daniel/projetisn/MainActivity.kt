@@ -29,35 +29,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        val lng = location.longitude
-        val lat = location.latitude*/
-
-        /*val locationListener: LocationListener = LocationListener() {
-            fun onLocationChanged(location: Location) {
-                lng = location.getLongitude()
-                lat = location.getLatitude()
-            }
-        }*/
-
-
-
-        /*val geocoder = Geocoder(this, Locale.getDefault())
-        //lat,lng, your current location
-        val addresses = geocoder.getFromLocation(lat, lng, 1)
-        var code = addresses[0].getPostalCode()*/
-
-
-
-
+        // On envoie la requête à l'API
         val network = WeatherNetworkClient(applicationContext)
         val call = network.getWeatherByCity("Strasbourg")
         call.enqueue(object : Callback<Weather>{
             override fun onFailure(call: Call<Weather>?, t: Throwable?) {
                 t?.printStackTrace()
             }
-
+            // En cas de réponse positive, on affiche les données dans l'interface
             override fun onResponse(call: Call<Weather>?, response: Response<Weather>?) {
                 val weather: Weather? = response?.body()
                 val temp = convertToCelsius(weather?.main?.temp!!)
@@ -78,6 +57,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Fonction pour convertir la température obtenue en degrés Fahrenheit en degrés Celsius
     fun convertToCelsius(temp: Float): Double{
         return Math.round(((temp - 32)/1.8)).toDouble()
     }

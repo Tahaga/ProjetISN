@@ -2,7 +2,7 @@ package blasko.daniel.projetisn
 
 import com.google.gson.annotations.SerializedName
 
-
+// Classe Weather avec une nested class Main (constructeurs = les données dont un aura besoin de l'API)
 class Weather {
     var main : Main = Main()
 }
