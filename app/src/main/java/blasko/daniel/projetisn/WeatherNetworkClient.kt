@@ -12,14 +12,14 @@ class WeatherNetworkClient(val context: Context){
     val apiKey = "4239ff0855db08e626d86d444748437f"
 
     // On construit l'URL de la requête avec retrofit et on instancie WeatherService pour effectuer la requête (fonction weatherByCity) avec la ville et la clé de l'API en paramètres, pour renvoyer l'objet weather contenant les différentes données
-    fun getWeatherByCity(city:String): Call<Weather> {
+    fun getWeatherByCity(city:String): Call<WeatherClass> {
         val network = Retrofit.Builder()
                 .baseUrl("http://api.openweathermap.org/data/2.5/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val weatherServices = network.create(WeatherService::class.java)
-        val weather = weatherServices.weatherByCity("imperial", city, apiKey)
-        return weather
+        val weatherData = weatherServices.weatherByCity("imperial", city, apiKey)
+        return weatherData
     }
 
 }
