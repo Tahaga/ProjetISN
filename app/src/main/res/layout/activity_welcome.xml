@@ -41,7 +41,7 @@ Click the icon and you won't be cold today!"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="45dp"
-        android:text="App version : 2.0"
+        android:text="App version : 1.1"
         android:textColor="#FFFF"
         android:id="@+id/textView" />
 

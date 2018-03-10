@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val call = network.getWeatherByCity(city)
         call.enqueue(object : Callback<WeatherClass>{
             override fun onFailure(call: Call<WeatherClass>?, t: Throwable?) {
-                t?.printStackTrace()
+                //t?.printStackTrace()
             }
             // En cas de réponse positive, on affiche les données dans l'interface
             override fun onResponse(call: Call<WeatherClass>?, response: Response<WeatherClass>?) {
@@ -59,10 +59,10 @@ class MainActivity : AppCompatActivity() {
                     imageView3.setImageResource(boots)
                 }
                 else if (temp <= 5 && temp > 0){
-                    textViewMenText.setText("A longsleeve shirt")
-                    textViewWomenText.setText("A warmer sweather")
-                    imageView.setImageResource(manchelongues)
-                    imageView3.setImageResource(pull)
+                    textViewMenText.setText("A warmer sweather")
+                    textViewWomenText.setText("A jacket")
+                    imageView.setImageResource(pull)
+                    imageView3.setImageResource(doudoune)
                 }
                 else if (temp <= 10 && temp > 5){
                     textViewMenText.setText("A shirt")
@@ -71,16 +71,16 @@ class MainActivity : AppCompatActivity() {
                     imageView3.setImageResource(manteau)
                 }
                 else if (temp <= 15 && temp > 10) {
-                    textViewMenText.setText("A longsleeve t-shirt")
-                    textViewWomenText.setText("Some jeans")
-                    imageView.setImageResource(manchelongues)
+                    textViewMenText.setText("A sweatshirt")
+                    textViewWomenText.setText("Jeans")
+                    imageView.setImageResource(sweat)
                     imageView3.setImageResource(pantalon)
                 }
                 else if (temp <= 20 && temp > 15){
-                    textViewMenText.setText("A t-shirt")
-                    textViewWomenText.setText("A light vest")
+                    textViewMenText.setText("A shirt")
+                    textViewWomenText.setText("Sneakers")
                     imageView.setImageResource(tshirt)
-                    imageView3.setImageResource(gilet)
+                    imageView3.setImageResource(baskets)
                 }
                 else {
                     textViewMenText.setText("A t-shirt")
