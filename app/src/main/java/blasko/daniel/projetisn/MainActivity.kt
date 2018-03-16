@@ -1,22 +1,74 @@
 package blasko.daniel.projetisn
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import blasko.daniel.projetisn.R.drawable.*
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlinx.android.synthetic.main.activity_main.*
-import android.content.Intent
-
-
 
 
 class MainActivity : AppCompatActivity() {
 
+    // Fonction pour convertir la température obtenue en degrés Fahrenheit en degrés Celsius
+    fun convertToCelsius(temp: Float): Double{
+        return Math.round(((temp - 32)/1.8)).toDouble()
+    }
+
+    // Fonction pour convertir la vitesse en mph en kmh
+    fun convertToKmh(speed : Float): Double{
+        return Math.round((speed * 1.60934)).toDouble()
+    }
+
+    // On inflate le menu partager dans l'actionbar
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_share_button, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    // On définit l'action lors de l'appui dans l'action bar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            // Si l'on appuie sur le bouton de partage...
+            R.id.buttonShare -> {
+
+                // On prépare l'intent pour passer les données à l'application externe
+                val shareIntent = Intent()
+                shareIntent.action = Intent.ACTION_SEND
+
+                // On définit ensuite les données que l'on va passer à l'application
+                shareIntent.setType("text/plain")
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Ce que je vais mettre aujourd'hui")
+
+                // On passe les données
+                startActivity(Intent.createChooser(shareIntent, "Partage ta tenue sur :"))
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Actions lors du partage avec Twitter
+        twitterImageView.setOnClickListener{
+            // On prépare un intent (ACTION_SEND) pour passer des données à l'application Twitter
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+
+            // On définit ensuite les données que l'on va passer à l'application
+            shareIntent.setType("text/plain")
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Ce que je vais mettre aujourd'hui")
+
+            // On passe les données
+            startActivity(Intent.createChooser(shareIntent, "Partage ta tenue sur :"))
+        }
 
         // On récupère l'intent avec la ville
         val intent = intent
@@ -52,7 +104,13 @@ class MainActivity : AppCompatActivity() {
                     imageViewMeteo.setImageResource(sun)
                 }
                 // REMPLACER PAR UN CASE SWITCH (－‸ლ)
-                if (temp <= 0 && temp > -40){
+                if (city == "Neuhof" || city == "neuhof"){
+                    textViewMenText.setText("Un bo mayo")
+                    textViewWomenText.setText("ce genr de jogging")
+                    imageView.setImageResource(maillot)
+                    imageView3.setImageResource(jogging)
+                }
+                else if (temp <= 0 && temp > -40){
                     textViewMenText.setText("A warm jacket")
                     textViewWomenText.setText("Warm boots")
                     imageView.setImageResource(doudoune)
@@ -96,14 +154,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // Fonction pour convertir la température obtenue en degrés Fahrenheit en degrés Celsius
-    fun convertToCelsius(temp: Float): Double{
-        return Math.round(((temp - 32)/1.8)).toDouble()
-    }
-
-    // Fonction pour convertir la vitesse en mph en kmh
-    fun convertToKmh(speed : Float): Double{
-        return Math.round((speed * 1.60934)).toDouble()
-    }
 
 }

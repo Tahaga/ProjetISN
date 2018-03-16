@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<item xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/buttonShare"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item android:id="@+id/buttonShare"
     android:title="Share"
     android:icon="@drawable/twitter"
     app:showAsAction="always"
-    android:layout_height="20dp"
-    android:layout_width="20dp"/>
+    app:srcCompat="@drawable/twitter"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"/>
+
+</menu>
