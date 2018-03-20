@@ -16,7 +16,7 @@ class WelcomeActivity : AppCompatActivity() {
         // On lance MainActivity au clic sur le logo, pas d'extra avec l'intent pour l'instant
         activityLogo.setOnClickListener {
             var city : String = editTextCity.text.toString()
-            if (city == ""){
+            if (city == "") {
                 Toast.makeText(this, "Please, enter you city name!", Toast.LENGTH_SHORT).show()
             }
             else {

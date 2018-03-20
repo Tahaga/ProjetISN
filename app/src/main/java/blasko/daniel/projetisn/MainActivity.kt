@@ -13,6 +13,9 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
+    // Variables de  classe pour les réutiliser dans la méthode de partage
+    var textMen : String = ""
+    var textWomen : String = ""
 
     // Fonction pour convertir la température obtenue en degrés Fahrenheit en degrés Celsius
     fun convertToCelsius(temp: Float): Double{
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         return Math.round((speed * 1.60934)).toDouble()
     }
 
+
     // On inflate le menu partager dans l'actionbar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_share_button, menu)
@@ -33,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     // On définit l'action lors de l'appui dans l'action bar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
-            // Si l'on appuie sur le bouton de partage...
+        // Si l'on appuie sur le bouton de partage...
             R.id.buttonShare -> {
 
                 // On prépare l'intent pour passer les données à l'application externe
@@ -42,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
                 // On définit ensuite les données que l'on va passer à l'application
                 shareIntent.setType("text/plain")
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Ce que je vais mettre aujourd'hui")
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Today I'll wear ${textMen.toLowerCase()} and ${textWomen.toLowerCase()}! Download MeteoWear on the playstore to know what you should wear based on the weather forecast! https://play.google.com/store/apps/details?id=blasko.daniel.projetisn")
 
                 // On passe les données
                 startActivity(Intent.createChooser(shareIntent, "Partage ta tenue sur :"))
@@ -55,20 +59,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // Actions lors du partage avec Twitter
-        twitterImageView.setOnClickListener{
-            // On prépare un intent (ACTION_SEND) pour passer des données à l'application Twitter
-            val shareIntent = Intent()
-            shareIntent.action = Intent.ACTION_SEND
-
-            // On définit ensuite les données que l'on va passer à l'application
-            shareIntent.setType("text/plain")
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "Ce que je vais mettre aujourd'hui")
-
-            // On passe les données
-            startActivity(Intent.createChooser(shareIntent, "Partage ta tenue sur :"))
-        }
 
         // On récupère l'intent avec la ville
         val intent = intent
@@ -103,50 +93,51 @@ class MainActivity : AppCompatActivity() {
                 else{
                     imageViewMeteo.setImageResource(sun)
                 }
-                // REMPLACER PAR UN CASE SWITCH (－‸ლ)
-                if (city == "Neuhof" || city == "neuhof"){
-                    textViewMenText.setText("Un bo mayo")
-                    textViewWomenText.setText("ce genr de jogging")
-                    imageView.setImageResource(maillot)
-                    imageView3.setImageResource(jogging)
+
+
+                when {
+                    (temp <= 0 && temp > -40) -> {
+                        textMen = "A warm jacket"
+                        textWomen = "Warm boots"
+                        imageView.setImageResource(doudoune)
+                        imageView3.setImageResource(boots)
+                    }
+                    (temp <= 5 && temp > 0) -> {
+                        textMen = "A warmer sweather"
+                        textWomen = "A jacket"
+                        imageView.setImageResource(pull)
+                        imageView3.setImageResource(doudoune)
+                    }
+                    (temp <= 10 && temp > 5) -> {
+                        textMen = "A shirt"
+                        textWomen = "A warmer coat"
+                        imageView.setImageResource(chemise)
+                        imageView3.setImageResource(manteau)
+                    }
+                    (temp <= 15 && temp > 10) -> {
+                        textMen = "A sweatshirt"
+                        textWomen = "Jeans"
+                        imageView.setImageResource(sweat)
+                        imageView3.setImageResource(pantalon)
+                    }
+                    (temp <= 20 && temp > 15) -> {
+                        textMen = "A shirt"
+                        textWomen = "Sneakers"
+                        imageView.setImageResource(tshirt)
+                        imageView3.setImageResource(baskets)
+                    }
+                    else -> {
+                        textMen = "A t-shirt"
+                        textWomen = "A rock"
+                        textView2.setText("OR")
+                        imageView.setImageResource(tshirt)
+                        imageView3.setImageResource(tshirtjupe)
+                    }
                 }
-                else if (temp <= 0 && temp > -40){
-                    textViewMenText.setText("A warm jacket")
-                    textViewWomenText.setText("Warm boots")
-                    imageView.setImageResource(doudoune)
-                    imageView3.setImageResource(boots)
-                }
-                else if (temp <= 5 && temp > 0){
-                    textViewMenText.setText("A warmer sweather")
-                    textViewWomenText.setText("A jacket")
-                    imageView.setImageResource(pull)
-                    imageView3.setImageResource(doudoune)
-                }
-                else if (temp <= 10 && temp > 5){
-                    textViewMenText.setText("A shirt")
-                    textViewWomenText.setText("A warmer coat")
-                    imageView.setImageResource(chemise)
-                    imageView3.setImageResource(manteau)
-                }
-                else if (temp <= 15 && temp > 10) {
-                    textViewMenText.setText("A sweatshirt")
-                    textViewWomenText.setText("Jeans")
-                    imageView.setImageResource(sweat)
-                    imageView3.setImageResource(pantalon)
-                }
-                else if (temp <= 20 && temp > 15){
-                    textViewMenText.setText("A shirt")
-                    textViewWomenText.setText("Sneakers")
-                    imageView.setImageResource(tshirt)
-                    imageView3.setImageResource(baskets)
-                }
-                else {
-                    textViewMenText.setText("A t-shirt")
-                    textViewWomenText.setText("A rock")
-                    textView2.setText("OR")
-                    imageView.setImageResource(tshirt)
-                    imageView3.setImageResource(tshirtjupe)
-                }
+
+                textViewMenText.text = textMen
+                textViewWomenText.text = textWomen
+
             }
 
         })
