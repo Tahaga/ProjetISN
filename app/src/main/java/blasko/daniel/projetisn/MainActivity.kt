@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity() {
                     else -> {
                         textMen = "A t-shirt"
                         textWomen = "A rock"
-                        textView2.setText("OR")
+                        textView2.text = "OR"
                         imageView.setImageResource(tshirt)
                         imageView3.setImageResource(tshirtjupe)
                     }
@@ -138,8 +138,15 @@ class MainActivity : AppCompatActivity() {
                 textViewMenText.text = textMen
                 textViewWomenText.text = textWomen
 
-            }
+                if (city == "Neuhof" || city == "neuhof") {
+                    textView2.text = "ET"
+                    textViewMenText.text = "Ce genre de survet"
+                    textViewWomenText.text = "Un p'tit jogging"
+                    imageView.setImageResource(yamaha)
+                    imageView3.setImageResource(jogging)
+                }
 
+            }
         })
 
 
