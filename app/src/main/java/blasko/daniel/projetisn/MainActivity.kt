@@ -10,12 +10,45 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     // Variables de  classe pour les réutiliser dans la méthode de partage
     var textMen : String = ""
     var textWomen : String = ""
+
+    // Tableaux des différentes tenues par tranches de températures
+    val veryColdOne : IntArray = intArrayOf(doudoune, doudoune2, doudoune3, doudoun3, manteau, pull4, pull2, pull3, hoodie)
+    val veryColdTwo : IntArray = intArrayOf(bonnet, bonnet2, bonnet3, boots, boots2, boots3, gants2, gants, scarf)
+    val veryColdOneText : Array<String> = arrayOf("A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A sweater", "A sweater", "A sweater", "A sweater")
+    val veryColdTwoText : Array<String> = arrayOf("A woolly hat", "A woolly hat", "A woolly hat", "Warm boots", "Warm boots", "Warm boots", "Gloves", "Gloves", "A scarf")
+
+    val coldOne : IntArray = intArrayOf(hoodie, hoodie2, pull, pull2, pull3, pull4, sweat, bonnet, bonnet3, scarf)
+    val coldTwo : IntArray = intArrayOf(doudoune, doudoune2, doudoun3, doudoune3, manteau, manteau3, manteau4, manteau5, manteau6, manteau7)
+    val coldOneText : Array<String> = arrayOf("A warm sweater", "A warm sweater", "A warm sweater", "A warm sweater", "A warm sweater", "A warm sweater", "A warm sweater", "A woolly hat", "A woolly hat", "A scarf")
+    val coldTwoText : Array<String> = arrayOf("A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket")
+
+    val normalOne : IntArray = intArrayOf()
+    val normalTwo : IntArray = intArrayOf()
+    val normalOneText : Array<String> = arrayOf()
+    val normalTwoText : Array<String> = arrayOf()
+
+    val warmOne : IntArray = intArrayOf()
+    val warmTwo : IntArray = intArrayOf()
+    val warmOneText : Array<String> = arrayOf()
+    val warmTwoText : Array<String> = arrayOf()
+
+    val hotOne : IntArray = intArrayOf()
+    val hotTwo : IntArray = intArrayOf()
+    val hotOneText : Array<String> = arrayOf()
+    val hotTwoText : Array<String> = arrayOf()
+
+    val boilingOne : IntArray = intArrayOf()
+    val boilingTwo : IntArray = intArrayOf()
+    val boilingOneText : Array<String> = arrayOf()
+    val boilingTwoText : Array<String> = arrayOf()
+
 
     // Fonction pour convertir la température obtenue en degrés Fahrenheit en degrés Celsius
     fun convertToCelsius(temp: Float): Double{
@@ -78,6 +111,8 @@ class MainActivity : AppCompatActivity() {
                 val temp = convertToCelsius(weather?.main?.temp!!)
                 val humidity = weather?.main?.humidity!!
                 val wind = convertToKmh(weather?.wind?.speed!!)
+
+
                 // Weather data...
                 println("temp : $temp")
                 textViewWind.setText("Current wind speed : ${wind.toString()}km/h")
@@ -94,13 +129,17 @@ class MainActivity : AppCompatActivity() {
                     imageViewMeteo.setImageResource(sun)
                 }
 
+                // Pour générer un nombre au hasard
+                val random = Random()
+                var randomNumber : Int = 9999
 
                 when {
                     (temp <= 0 && temp > -40) -> {
-                        textMen = "A warm jacket"
-                        textWomen = "Warm boots"
-                        imageView.setImageResource(doudoune)
-                        imageView3.setImageResource(boots)
+                        randomNumber = random.nextInt(10)
+                        textMen = veryColdOneText[randomNumber]
+                        textWomen = veryColdTwoText[randomNumber]
+                        imageView.setImageResource(veryColdOne[randomNumber])
+                        imageView3.setImageResource(veryColdTwo[randomNumber])
                     }
                     (temp <= 5 && temp > 0) -> {
                         textMen = "A warmer sweather"
