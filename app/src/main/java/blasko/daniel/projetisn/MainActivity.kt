@@ -14,36 +14,48 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+
     // Variables de  classe pour les réutiliser dans la méthode de partage
     var textMen : String = ""
     var textWomen : String = ""
 
+    // Pour générer un nombre au hasard
+    val random = Random()
+    var randomNumber : Int = 0
+    var randomNumberTwo : Int = 0
+
+    // < 0°C
     // Tableaux des différentes tenues par tranches de températures
     val veryColdOne : IntArray = intArrayOf(doudoune, doudoune2, doudoune3, doudoun3, manteau, pull4, pull2, pull3, hoodie)
     val veryColdTwo : IntArray = intArrayOf(bonnet, bonnet2, bonnet3, boots, boots2, boots3, gants2, gants, scarf)
     val veryColdOneText : Array<String> = arrayOf("A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A sweater", "A sweater", "A sweater", "A sweater")
     val veryColdTwoText : Array<String> = arrayOf("A woolly hat", "A woolly hat", "A woolly hat", "Warm boots", "Warm boots", "Warm boots", "Gloves", "Gloves", "A scarf")
 
+    // 0-7°C  pour l'instant
     val coldOne : IntArray = intArrayOf(hoodie, hoodie2, pull, pull2, pull3, pull4, sweat, bonnet, bonnet3, scarf)
     val coldTwo : IntArray = intArrayOf(doudoune, doudoune2, doudoun3, doudoune3, manteau, manteau3, manteau4, manteau5, manteau6, manteau7)
     val coldOneText : Array<String> = arrayOf("A warm sweater", "A warm sweater", "A warm sweater", "A warm sweater", "A warm sweater", "A warm sweater", "A warm sweater", "A woolly hat", "A woolly hat", "A scarf")
     val coldTwoText : Array<String> = arrayOf("A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket", "A warm jacket")
 
+    // 6-10°C (non utilisé pour l'instant)
     val normalOne : IntArray = intArrayOf()
     val normalTwo : IntArray = intArrayOf()
     val normalOneText : Array<String> = arrayOf()
     val normalTwoText : Array<String> = arrayOf()
 
-    val warmOne : IntArray = intArrayOf()
-    val warmTwo : IntArray = intArrayOf()
-    val warmOneText : Array<String> = arrayOf()
-    val warmTwoText : Array<String> = arrayOf()
+    // 7-14°C pour l'instant
+    val warmOne : IntArray = intArrayOf(chemise, chemise1, chemise2, chemise3, chemise4, chemise5, chemise6, suit, suit2, suit3, pull3, pull, pull2)
+    val warmTwo : IntArray = intArrayOf(manteau, manteau3, manteau4, manteau5)
+    val warmOneText : Array<String> = arrayOf("A shirt", "A shirt", "A shirt", "A shirt", "A shirt", "A shirt", "A shirt", "A suit", "A suit", "A suit", "A sweater", "A sweater", "A sweater")
+    val warmTwoText : Array<String> = arrayOf("A coat", "A coat", "A coat", "A coat")
 
+    // 14-20°C
     val hotOne : IntArray = intArrayOf()
     val hotTwo : IntArray = intArrayOf()
     val hotOneText : Array<String> = arrayOf()
     val hotTwoText : Array<String> = arrayOf()
 
+    // 20+°C
     val boilingOne : IntArray = intArrayOf()
     val boilingTwo : IntArray = intArrayOf()
     val boilingOneText : Array<String> = arrayOf()
@@ -63,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     // On inflate le menu partager dans l'actionbar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_refresh_button, menu)
         menuInflater.inflate(R.menu.main_share_button, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -83,6 +96,14 @@ class MainActivity : AppCompatActivity() {
 
                 // On passe les données
                 startActivity(Intent.createChooser(shareIntent, "Partage ta tenue sur :"))
+                return true
+            }
+            R.id.buttonRefresh -> {
+                val intent = intent
+                var city : String = intent.getStringExtra("city")
+                val myIntent = Intent(this@MainActivity, MainActivity::class.java)
+                myIntent.putExtra("city", city)
+                startActivity(myIntent)
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -129,48 +150,47 @@ class MainActivity : AppCompatActivity() {
                     imageViewMeteo.setImageResource(sun)
                 }
 
-                // Pour générer un nombre au hasard
-                val random = Random()
-                var randomNumber : Int = 9999
 
                 when {
                     (temp <= 0 && temp > -40) -> {
-                        randomNumber = random.nextInt(10)
+                        randomNumber = random.nextInt(veryColdOne.size + 1)
+                        randomNumberTwo = random.nextInt(veryColdTwo.size + 1)
                         textMen = veryColdOneText[randomNumber]
-                        textWomen = veryColdTwoText[randomNumber]
+                        textWomen = veryColdTwoText[randomNumberTwo]
                         imageView.setImageResource(veryColdOne[randomNumber])
-                        imageView3.setImageResource(veryColdTwo[randomNumber])
+                        imageView3.setImageResource(veryColdTwo[randomNumberTwo])
                     }
-                    (temp <= 5 && temp > 0) -> {
-                        textMen = "A warmer sweather"
-                        textWomen = "A jacket"
-                        imageView.setImageResource(pull)
-                        imageView3.setImageResource(doudoune)
+                    (temp <= 7 && temp > 0) -> {
+                        randomNumber = random.nextInt(coldOne.size + 1)
+                        randomNumberTwo = random.nextInt(coldTwo.size + 1)
+                        textMen = coldOneText[randomNumber]
+                        textWomen = coldTwoText[randomNumberTwo]
+                        imageView.setImageResource(coldOne[randomNumber])
+                        imageView3.setImageResource(coldTwo[randomNumberTwo])
                     }
-                    (temp <= 10 && temp > 5) -> {
-                        textMen = "A shirt"
-                        textWomen = "A warmer coat"
-                        imageView.setImageResource(chemise)
-                        imageView3.setImageResource(manteau)
+                    (temp <= 14 && temp > 7) -> {
+                        randomNumber = random.nextInt(warmOne.size + 1)
+                        randomNumberTwo = random.nextInt(warmTwo.size + 1)
+                        textMen = warmOneText[randomNumber]
+                        textWomen = warmTwoText[randomNumberTwo]
+                        imageView.setImageResource(warmOne[randomNumber])
+                        imageView3.setImageResource(warmTwo[randomNumberTwo])
                     }
-                    (temp <= 15 && temp > 10) -> {
-                        textMen = "A sweatshirt"
-                        textWomen = "Jeans"
-                        imageView.setImageResource(sweat)
-                        imageView3.setImageResource(pantalon)
-                    }
-                    (temp <= 20 && temp > 15) -> {
-                        textMen = "A shirt"
-                        textWomen = "Sneakers"
-                        imageView.setImageResource(tshirt)
-                        imageView3.setImageResource(baskets)
+                    (temp <= 20 && temp > 14) -> {
+                        randomNumber = random.nextInt(hotOne.size + 1)
+                        randomNumberTwo = random.nextInt(hotTwo.size + 1)
+                        textMen = hotOneText[randomNumber]
+                        textWomen = hotTwoText[randomNumberTwo]
+                        imageView.setImageResource(hotOne[randomNumber])
+                        imageView3.setImageResource(hotTwo[randomNumberTwo])
                     }
                     else -> {
-                        textMen = "A t-shirt"
-                        textWomen = "A rock"
-                        textView2.text = "OR"
-                        imageView.setImageResource(tshirt)
-                        imageView3.setImageResource(tshirtjupe)
+                        randomNumber = random.nextInt(boilingOne.size + 1)
+                        randomNumberTwo = random.nextInt(boilingTwo.size + 1)
+                        textMen = boilingOneText[randomNumber]
+                        textWomen = boilingTwoText[randomNumberTwo]
+                        imageView.setImageResource(boilingOne[randomNumber])
+                        imageView3.setImageResource(boilingTwo[randomNumberTwo])
                     }
                 }
 

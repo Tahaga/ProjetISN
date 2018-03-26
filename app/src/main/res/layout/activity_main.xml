@@ -81,7 +81,7 @@
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="65dp"
                 android:src="@drawable/chemise" />
 
             <TextView
@@ -109,7 +109,7 @@
                 android:layout_alignBottom="@+id/imageView"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="18dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="95dp"
                 android:text="AND"
                 android:textAlignment="center"
                 android:textColor="#FFFF"
@@ -133,7 +133,7 @@
                 android:layout_alignEnd="@+id/textViewNull"
                 android:layout_alignTop="@+id/imageView"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="65dp"
                 android:src="@drawable/manteau" />
 
             <TextView
